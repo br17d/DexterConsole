@@ -1,4 +1,4 @@
-__title__ = "agvTrack.py"
+__title__ = "Tracker.py"
 __author__ = "Bryant Rodriguez"
 __copyright__ = "Copyright (C) 2022, Bryant Rodriguez"
 __license__ = "MIT License"
@@ -35,4 +35,6 @@ class ViveTracker(Tracker):
 
     def get_pose_euler(self):
         return self.pose_euler
+
+
 

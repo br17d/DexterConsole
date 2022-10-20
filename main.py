@@ -1,3 +1,11 @@
+__title__ = "agvTrack.py"
+__author__ = "Bryant Rodriguez"
+__copyright__ = "Copyright (C) 2022, Bryant Rodriguez"
+__license__ = "MIT License"
+__version__ = "v0.7"
+__email__ = "bryant1.rodriguez@famu.edu"
+__status__ = "Prototype"
+
 # This is a sample Python script.
 
 # Press ⌃R to execute it or replace it with your code.
@@ -18,13 +26,13 @@ def PollTrackers():
 
     if len(sys.argv) == 1:
         interval = 1 / 250
-    elif len(sys.argv) == 2:
+    elif len(sys.argv) >= 2:
         interval = 1 / float(sys.argv[1])
     else:
-        print("Incorrect number of arguments.")
+        print("No trackers or controllers currently connected.")
         interval = False
 
-    # Continue retrieve and display current detected x,y,z,yaw,pitch,roll of tracker(s)
+    # Continue retrieve and display current detected x,y,z,yaw,pitch,roll, velocity of tracker(s)
 
     while (True):
         try:
@@ -38,6 +46,7 @@ def PollTrackers():
                             txt += "%.4f" % each
                             txt += " "
                         tTxt = txt
+                        update_text(txt)
                     except:
                         txt = tTxt
                     try:
@@ -58,6 +67,7 @@ def PollTrackers():
         # Exception handling was added to stop this from happening. If an error is outputted,
         # the program instead continuously waits 3 seconds for the VIVE Tracker to come
         # back into view.
+
         except:
             print("\r" + "VIVE Tracker not detected. Seeking...", end="")
             time.sleep(1)
@@ -70,3 +80,5 @@ def SendCommand(cmd):
     cmdString = strcat(codeString1, cmd, codeString2)
 
     [status, result] = system(cmdString)
+
+
